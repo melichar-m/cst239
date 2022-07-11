@@ -81,12 +81,13 @@ public class Car
 	{
 		if(checkPsi() && !getIsRunning())
 		{
+			System.out.print(this.name + ": ");
 			this.engine.start();
 			this.isRunning = true;
 		}
 		else
 		{
-			System.out.println("Tire pressure too low or the engine is already running!");
+			System.out.println(this.name + ": Tire pressure too low or the engine is already running!");
 		}
 	}
 	
@@ -108,6 +109,10 @@ public class Car
 		if(getIsRunning() && this.speed < MAX_SPEED)
 		{
 			this.speed += 1;
+			if(this.speed % 10 == 0)
+			{
+				System.out.println(this.name + ": " + this.speed + " mph");
+			}
 		}
 		else
 		{
@@ -128,6 +133,10 @@ public class Car
 		else
 		{
 			this.speed -= 1;
+			if(this.speed % 10 == 0)
+			{
+				System.out.println(this.name + ": " + this.speed + " mph");
+			}
 		}
 	}
 	
