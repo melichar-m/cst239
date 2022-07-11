@@ -3,6 +3,33 @@ package app;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Store will make use of ArrayList of Products inventory and cart
+ * in order to place Products into the appropriate locations based
+ * on menu selections made entirely through the console. The user
+ * should be able to place items in their cart, cancel items from their
+ * cart and purchase the items in their cart as of Milestone 1.
+ *
+ * My take: Currently, I have some issues with how I ended up
+ * doing this project. I feel like I have too much bloat
+ * in some areas within my code and that they should 
+ * serve more singular purposes to enhance readability and therefore,
+ * code debugging. I will be looking at refactoring this
+ * for the future so that I can complete future milestones easier.
+ * 
+ * There are some errors within the code that are logic errors.
+ * I haven't had enough time to fix them, as I've been traveling
+ * visiting my grandmother after a major stroke, and taking care
+ * of my grandfather. I am home now, but the airport ate a large
+ * portion of my time and despite putting 20+ hours into this code,
+ * I still feel like it wasn't enough as I hadn't used Java in 
+ * just over 10 years, and it isn't Pythonic at all. I feel like
+ * this helped a lot with reintroducing myself to Java, though, so
+ * future assignments likely won't take me quite as long to
+ * get to a point where I'm debugging code.
+ * @author Michael Melichar
+ *
+ */
 public class Store
 {
 	private Product product;
@@ -12,7 +39,7 @@ public class Store
 	
 	/**
 	 * initializes and returns the store to the caller
-	 * @return ArrayList<Product> store
+	 * @return ArrayList of Products store
 	 */
 	public static ArrayList<Product> init()
 	{

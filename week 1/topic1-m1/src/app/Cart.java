@@ -1,7 +1,15 @@
 package app;
 
 import java.util.*;
-
+/**
+ * Cart will contain many products and have the ability to be added to
+ * by a store(ArrayList of Salable Products), as well as the ability to
+ * add from the cart to the player's inventory via purchasing. The player
+ * will be able to cancel items out of their cart before purchasing should
+ * they end up changing their mind.
+ * @author Michael Melichar
+ *
+ */
 public class Cart
 {
 	private ArrayList<Product> product;
@@ -66,11 +74,25 @@ public class Cart
 		}
 	}
 	
+	/**
+	 * This will use the ArrayList method size in order to
+	 * return the size of our cart to us for use in the store
+	 * and in other driver methods.
+	 * @return int size
+	 */
 	public int size()
 	{
 		return this.product.size();
 	}
 	
+	/**
+	 * get allows us to get an object at a given index, 
+	 * and will traditionally be used with indexOf to 
+	 * generically find the user-input item to be
+	 * accessed within the cart's arraylist of products
+	 * @param index
+	 * @return
+	 */
 	public Product get(int index)
 	{
 		return this.product.get(index);

@@ -7,6 +7,11 @@ public class Inventory
 	private int gold;
 	private ArrayList<Product> items;
 	
+	/**
+	 * check if gold > item cost
+	 * @param storeItem
+	 * @return boolean
+	 */
 	public boolean canPurchase(Product storeItem)
 	{
 		if(this.gold < storeItem.getPrice())
@@ -17,6 +22,9 @@ public class Inventory
 		return true;
 	}
 	
+	/**
+	 * default constructor sets gold to 0 and has an empty arraylist of products(empty inventory)
+	 */
 	public Inventory()
 	{
 		this.gold = 0;
@@ -24,21 +32,39 @@ public class Inventory
 		this.items = items;
 	}
 	
+	/**
+	 * returns the arraylist's size
+	 * @return int size
+	 */
 	public int size()
 	{
 		return this.items.size();
 	}
 	
+	/**
+	 * gets the object at a given index
+	 * @param index
+	 * @return Product
+	 */
 	public Product get(int index)
 	{
 		return this.items.get(index);
 	}
 	
+	/**
+	 * adds a given Product to the inventory ArrayList
+	 * @param item
+	 */
 	public void addToInventory(Product item)
 	{
 		this.items.add(item);
 		System.out.println(this.items);
 	}
+	/**
+	 * removes an item from the inventory ArrayList,
+	 * does not remove all instances of the item
+	 * @param item
+	 */
 	public void removeFromInventory(Product item)
 	{
 		int index = this.items.indexOf(item);
