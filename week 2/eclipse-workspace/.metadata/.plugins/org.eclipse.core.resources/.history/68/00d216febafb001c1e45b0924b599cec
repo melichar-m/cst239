@@ -1,0 +1,183 @@
+package app;
+
+
+public class Car
+{
+	//constants
+	public int MIN_PSI = 32;
+	public int MAX_SPEED = 60;
+	public int MIN_SPEED = 1;
+	
+	//variable declarations	
+	private Engine engine;
+	private Tire[] tires;
+	private int speed;
+	private boolean isRunning = false;
+	private String name;
+	
+	/**
+	 * default constructor instantiates 4 of the same basic tire
+	 * and an engine
+	 */
+	public Car()
+	{
+		Engine engine = new Engine();
+		this.engine = engine;
+		this.name = "Average Phoenix Driver";
+		
+		Tire tire1 = new Tire(), tire2 = new Tire(), tire3 = new Tire(), tire4 = new Tire();
+		System.out.println(tire1);
+		this.tires[0] = tire1;
+		this.tires[1] = tire2;
+		this.tires[2] = tire3;
+		this.tires[3] = tire4;
+		/**
+		 * I would like to know more about how to instantiate
+		 * an object array more generically and automatically
+		 * like this, but I don't think I'm searching quite
+		 * the right things on StackOverflow. Any insight
+		 * would be greatly appreciated.
+		Tire tire = new Tire();
+		for(int i = 0; i < 4; i++)
+		{
+			this.tires[i] = tire;
+		}
+		*/
+	}
+	/**
+	 * Constructor that instantiates 4 of the same specified tire
+	 * and an engine
+	 * @param tire
+	 */
+	public Car(int psi, String name)
+	{
+		Engine engine = new Engine();
+		this.engine = engine;
+		this.name = name;
+		
+		Tire tire1 = new Tire(psi), tire2 = new Tire(psi), tire3 = new Tire(psi), tire4 = new Tire(psi);
+		this.tires[0] = tire1;
+		this.tires[1] = tire2;
+		this.tires[2] = tire3;
+		this.tires[3] = tire4;
+		/**
+		 * I would like to know more about how to instantiate
+		 * an object array more generically and automatically
+		 * like this, but I don't think I'm searching quite
+		 * the right things on StackOverflow. Any insight
+		 * would be greatly appreciated.
+		for(int i = 0; i < 4; i++)
+		{
+			Tire tire = new Tire(psi);
+			this.tires[i] = tire;
+		}
+		*/
+	}
+	/**
+	 * checks if tire pressure is sufficient to start car
+	 * @return boolean
+	 */
+	public boolean checkPsi()
+	{
+		for(int i = 0; i < 4; i++)
+		{
+			if(this.tires[i].getPsi() < MIN_PSI)
+			{
+				return false;
+			}
+			else
+			{
+				continue;
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * startEngine implements logic into checking if we can start the engine
+	 * then starting it if possible, printing an error to console if not
+	 */
+	public void startEngine()
+	{
+		if(checkPsi() && !getIsRunning())
+		{
+			this.engine.start();
+			this.isRunning = true;
+		}
+		else
+		{
+			System.out.println("Tire pressure too low or the engine is already running!");
+		}
+	}
+	
+	/**
+	 * method to check if the car is running or not
+	 * @return boolean
+	 */
+	public boolean getIsRunning()
+	{
+		return this.isRunning;
+	}
+	
+	/**
+	 * accelerate makes sure the car is running,
+	 * then increments speed if possible
+	 */
+	public void accelerate()
+	{
+		if(getIsRunning() && this.speed < MAX_SPEED)
+		{
+			this.speed += 1;
+		}
+		else
+		{
+			System.out.println("Engine must be turned on or the car is currently at maximum speed.");
+		}
+	}
+	/**
+	 * decelerate checks if the speed is less than 1, as we don't want
+	 * to deal with negative speeds in this race, no one's going
+	 * backward like parzival here.
+	 */
+	public void decelerate()
+	{
+		if(this.speed < MIN_SPEED)
+		{
+			System.out.println("Cannot decelerate, speed is at " + this.speed);
+		}
+		else
+		{
+			this.speed -= 1;
+		}
+	}
+	
+	/**
+	 * stopEngine stops the engine and switches the boolean flag isRunning to false
+	 */
+	public void stopEngine()
+	{
+		this.engine.stop();
+		this.isRunning = false;
+	}
+	
+	/**
+	 * restartEngine stops the engine with stopEngine,
+	 * then restarts it with startEngine.
+	 */
+	public void restartEngine()
+	{
+		stopEngine();
+		startEngine();
+	}
+	
+	public int getSpeed()
+	{
+		return this.speed;
+	}
+
+	public String getName()
+	{
+		return this.name;
+	}
+
+}

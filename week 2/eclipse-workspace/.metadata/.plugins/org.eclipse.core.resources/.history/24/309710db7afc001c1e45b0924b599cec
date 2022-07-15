@@ -1,0 +1,10 @@
+package app;
+
+public class Store
+{
+	public static void main(String[] args)
+	{
+		Product sword = new Product(00, "Needle", "Stick them with the pointy end", 150, 1, true);
+		System.out.println(sword);
+	}
+}

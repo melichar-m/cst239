@@ -1,0 +1,63 @@
+package app;
+
+import java.util.*;
+
+public class Cart
+{
+	private ArrayList<Product> product;
+	
+	/**
+	 * default constructor instantiates an arraylist for best adding/removing of product
+	 */
+	public Cart()
+	{
+		ArrayList<Product> product = new ArrayList<Product>();
+		this.product = product;
+	}
+	
+	/**
+	 * for all items in cart, get price to be able to have a total
+	 * @return float price
+	 */
+	public float totalPrice()
+	{
+		float price = 0;
+		
+		for(int i = 0; i < product.size(); i++)
+		{
+			price += this.product.get(i).getPrice();
+		}
+		
+		return price;
+	}
+	
+	/**
+	 * addToCart method makes the arraylist.add method accessible outside Cart class
+	 * @param item
+	 */
+	public void addToCart(Product item)
+	{
+		this.product.add(item);
+	}
+	
+	/**
+	 * removeFromCart method gets index of desired item for removal and removes from cart
+	 * @param item
+	 */
+	public void removeFromCart(Product item)
+	{
+		int index = this.product.indexOf(item);
+		this.product.remove(index);
+	}
+	
+	public String toString()
+	{
+		String out = "";
+		for(int i = 0; i < product.size(); i++)
+		{
+			out += product.get(i).toString() + "\n";
+		}
+		
+		return out;
+	}
+}

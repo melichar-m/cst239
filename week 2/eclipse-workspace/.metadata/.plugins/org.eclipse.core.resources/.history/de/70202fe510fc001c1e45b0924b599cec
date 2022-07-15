@@ -1,0 +1,36 @@
+package app;
+
+/**
+ * Tire class that has PSI property and
+ * a way to get and set PSI for tires as
+ * well as default and input based constructors
+ * @author michael
+ *
+ */
+public class Tire
+{
+	//var
+	private int psi;
+	
+	//const
+	private int MIN_PSI = 32;
+	
+	public Tire()
+	{
+		this.psi = MIN_PSI;
+	}
+
+	public Tire(int psi)
+	{
+		this.psi = psi;
+	}
+	
+	public int getPsi() {
+		return psi;
+	}
+
+	public void setPsi(int psi) {
+		this.psi = psi;
+	}
+	
+}

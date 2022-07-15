@@ -1,0 +1,29 @@
+package app;
+
+public class Tire
+{
+	//var
+	private int psi;
+	
+	//const
+	private int MIN_PSI = 32;
+	
+	public Tire()
+	{
+		this.psi = MIN_PSI;
+	}
+
+	public Tire(int psi)
+	{
+		this.psi = psi;
+	}
+	
+	public int getPsi() {
+		return psi;
+	}
+
+	public void setPsi(int psi) {
+		this.psi = psi;
+	}
+	
+}

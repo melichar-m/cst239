@@ -1,0 +1,76 @@
+package app;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Store
+{
+	private Product product;
+	private Cart cart;
+	private Inventory inventory;
+	private static ArrayList<Product> store;
+
+	public static void init()
+	{
+		Scanner scan = new Scanner(System.in);
+		ArrayList<Product> store = new ArrayList<Product>();
+		
+		Product sword = new Product(0, "Needle", "Stick them with the pointy end", 150, 1, true);
+		Product shield = new Product(1, "Bulwark of Azzinoth", "The coolest shield from the Burning Crusade", 100, 1, true);
+		Product smallHealthPotion = new Product(2, "Small Health Potion", "Heals 50 HP", 50, 5, true);
+		
+		store.add(sword);
+		store.add(shield);
+		store.add(smallHealthPotion);
+		
+		displayMenus();
+		
+		boolean isValidInput = false;
+		while(!isValidInput)
+		{
+			String in = scan.nextLine();
+			if("1".equals(in))
+			{
+				System.out.println(store);
+				displaySalables(store);
+			}
+		}
+		System.out.println("thanks");
+	}
+	
+	public static void displayMenus()
+	{
+		System.out.println("WELCOME!\nPlease, have a look around!\nPress 1 to look at our items");
+	}
+	
+	public static void displaySalables(ArrayList<Product> store)
+	{
+		System.out.println("What would you like to buy?");
+		String out = "";
+		for(int i = 0; i < store.size(); i++)
+		{
+			int j = i++;
+			out += "" + j + ". " + store.get(i).getName() + "cost: " + store.get(i).getPrice() + " gold." + "\n"; 
+		}
+	}
+	
+	public String toString()
+	{
+		String out = "";
+		
+		for(int i = 0; i < store.size(); i++)
+		{
+			out += "\n" + store.get(i).toString();
+		}
+		
+		return out;
+	}
+	
+
+	
+	public static void main(String[] args)
+	{
+		init();
+		
+	}
+}

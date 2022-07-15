@@ -1,0 +1,43 @@
+package app;
+
+public class Store
+{
+	private Product product;
+	private Cart cart;
+	private Inventory inventory;
+	
+	public void purchase(Product item)
+	{
+		if(this.inventory.getGold() < this.product.getPrice())
+		{
+			System.out.println("Not enough gold.");
+		}
+		else
+		{
+			this.cart.addToCart(item);
+		}
+	}
+	public static void main(String[] args)
+	{
+		Product sword = new Product(0, "Needle", "Stick them with the pointy end", 150, 1, true);
+		System.out.println(sword);
+		
+		Product shield = new Product(1, "Bulwark of Azzinoth", "The coolest shield from the Burning Crusade", 100, 1, true);
+		System.out.println(shield);
+		
+		Cart cart = new Cart();
+		
+		cart.addToCart(sword);
+		cart.addToCart(shield);
+		
+		System.out.println("Full cart example");
+		System.out.println(cart);
+		
+		cart.removeFromCart(sword);
+		
+		System.out.println("Cart after sword has been removed");
+		System.out.println(cart);
+		
+		System.out.println(inventory);
+	}
+}

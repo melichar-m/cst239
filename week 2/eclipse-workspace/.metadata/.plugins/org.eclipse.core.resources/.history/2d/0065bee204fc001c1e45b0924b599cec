@@ -1,0 +1,66 @@
+package app;
+
+public class Test
+{
+	public static void main(String[] args)
+	{
+		//default constructor car
+		Car car = new Car();
+
+		//constructor with good enough psi for tires
+		Car lightning = new Car(34, "Lightning McQueen");
+		
+		//constructor with low psi tires
+		Car mater = new Car(20, "Mater the Tow Truck");
+		
+		//honestly interested in how to fix this so that despite
+		//a silly naming convention, I could do this in less lines.
+		Car[] cars = new Car[3];
+		cars[0] = car;
+		cars[1] = lightning;
+		cars[2] = mater;
+		
+		System.out.println("Racers, start your engines!");
+		
+		for(int i = 0; i < 3; i++)
+		{
+			cars[i].startEngine();
+		}
+		
+		System.out.println("Uh-oh! Looks like " + mater.getName() + "'s having some trouble getting started!");
+		
+		long[] raceTimes = new long[3];
+		long fastest=9999;
+		int index = 4;
+		
+		for(int i = 0; i < 3; i++)
+		{
+			if(cars[i].getIsRunning())
+			{
+				final long startTime = System.currentTimeMillis();
+				int addTime = 0;
+				while(cars[i].getSpeed() < cars[i].MAX_SPEED)
+				{
+					cars[i].accelerate();
+					if(cars[i].getName() != "Lightning McQueen")
+					{
+						addTime += 1;
+					}
+				}
+				final long endTime = System.currentTimeMillis();
+				final long totalTime = endTime - startTime + addTime;
+				raceTimes[i] = totalTime;
+				System.out.println(cars[i].getName() + ": " + totalTime + " seconds");
+			}
+		}
+		for(int i = 0; i < 3; i++)
+		{
+			if(raceTimes[i] < fastest)
+			{
+				fastest = raceTimes[i];
+				index = i;
+			}
+		}
+		System.out.println("We have a winner! " + cars[index].getName() + " won with a time of " + fastest + "!");
+	}
+}

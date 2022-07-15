@@ -1,0 +1,79 @@
+package app;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Store
+{
+	private Product product;
+	private Cart cart;
+	private Inventory inventory;
+	private static ArrayList<Product> store;
+
+	public static void init()
+	{
+		Scanner scan = new Scanner(System.in);
+		ArrayList<Product> store = new ArrayList<Product>();
+		
+		Product sword = new Product(0, "Needle", "Stick them with the pointy end", 150, 1, true);
+		Product shield = new Product(1, "Bulwark of Azzinoth", "The coolest shield from the Burning Crusade", 100, 1, true);
+		Product smallHealthPotion = new Product(2, "Small Health Potion", "Heals 50 HP", 50, 5, true);
+		
+		store.add(sword);
+		store.add(shield);
+		store.add(smallHealthPotion);
+		
+		System.out.println("WELCOME!");
+		System.out.println("Please, have a look around!");
+		System.out.println("Press 1 to look at our items");
+		System.out.println("Press 2 to do nothing for now");
+		System.out.println("Press 3 to also do nothing");
+		
+		String in = scan.next();
+		
+		boolean isValidInput = false;
+		while(!isValidInput)
+		{
+			if(in == "1")
+			{
+				for(int i = 0; i < store.size(); i++)
+				{
+					System.out.println(store);
+				}
+				isValidInput = true;
+			}
+		}
+		System.out.println("thanks");
+	}
+	
+
+	
+	public static void main(String[] args)
+	{
+		init();
+		//System.out.println();
+		
+		
+		//System.out.println(shield);
+		
+		Cart cart = new Cart();
+		
+		//cart.addToCart(sword);
+		//cart.addToCart(shield);
+		
+		System.out.println("Full cart example");
+		System.out.println(cart);
+		
+		//cart.removeFromCart(sword);
+		
+		System.out.println("Cart after sword has been removed");
+		System.out.println(cart);
+		
+		Inventory inventory = new Inventory();
+		
+		System.out.println("Empty inventory");
+		System.out.println(inventory);
+		
+		//inventory.canPurchase(sword);
+	}
+}

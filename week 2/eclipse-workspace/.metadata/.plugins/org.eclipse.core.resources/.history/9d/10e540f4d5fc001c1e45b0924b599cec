@@ -1,0 +1,194 @@
+package app;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Store
+{
+	private Product product;
+	private Cart cart;
+	private static Inventory inventory;
+	private static ArrayList<Product> store;
+	
+	public static ArrayList<Product> init()
+	{
+		Scanner scan = new Scanner(System.in);
+		ArrayList<Product> store = new ArrayList<Product>();
+		Inventory inventory = new Inventory();
+		
+		Product sword = new Product(0, "Needle", "Stick them with the pointy end", 150, 1, true);
+		Product shield = new Product(1, "Bulwark of Azzinoth", "The coolest shield from the Burning Crusade", 100, 1, true);
+		Product smallHealthPotion = new Product(2, "Small Health Potion", "Heals 50 HP", 50, 5, true);
+		
+		store.add(sword);
+		store.add(shield);
+		store.add(smallHealthPotion);
+		
+		displayMenus("Main", store);
+		
+		//I'm rich!
+		inventory.setGold(999999);
+		
+
+		return store;
+	}
+	
+	public static void placeInCart(Inventory inventory, Cart cart, ArrayList<Product> store,Scanner scan)
+	{
+		String in = scan.nextLine();
+		//index = selection - 1
+		int selectionIndex = Integer.parseInt(in) - 1;
+		//if player gold > cost of item
+		if(inventory.canPurchase(store.get(selectionIndex)))
+		{
+			//give the item and subtract the appropriate amount of gold
+			cart.addToCart(store.get(selectionIndex));
+			//cart.setGold(inventory.getGold()-store.get(selectionIndex).getPrice());
+			
+		}
+	}
+	
+	public void displayGold()
+	{
+		System.out.println("Your gold: " + inventory.getGold());
+	}
+	
+	public static void displayMenus(String menuSelection, ArrayList<Product> store, Cart cart)
+	{
+		//String vars for less copy+paste
+		String welcome = "Welcome to Xoblob's Odds and Ends!\nPlease, have a look around!\n";
+		String cartIntro = "You could swear your basket just moved... \nbut anyway, here's your cart so far: \n";
+		String inventoryIntro = "Opening your Bag of Holding, you find: \n";
+		String productIntro = "Hello administrator! Hope you're having a lovely day! Here's the list of products.\n";
+		String options = "Press 1 to look at our items for sale\nPress 2 to sell back your items\nPress 3 to look at your cart";
+		String sellIntro = "What would you like to sell?\n";
+		String purchaseIntro = "Would you like to finalize your transaction?\n";
+		String quit = "Or press 'q' to return to the main menu.";
+		
+		if(menuSelection.equals("Main"))
+		{
+			System.out.println(welcome + options + quit);
+		}
+		if(menuSelection.equals("Cart"))
+		{
+			System.out.println(cartIntro + options + quit);			
+		}
+		if(menuSelection.equals("Inventory"))
+		{
+			System.out.println(inventoryIntro + options + quit);
+		}
+		if(menuSelection.equals("Product"))
+		{
+			System.out.println(productIntro + options + quit);
+		}
+		if(menuSelection.equals("Selling"))
+		{
+			String out = "";
+			out += welcome + sellIntro;
+			
+			System.out.println(out);
+			displaySalables(cart, store, "sell");
+		}
+	}
+	
+	
+	public static void displaySalables(Cart cart, ArrayList<Product> store, String mode)
+	{		
+		if(mode.equals("browse"))
+		{
+			for(int i = 0; i < store.size(); i++)
+			{
+				int j = i + 1;
+				System.out.println( j + ". " + store.get(i).getName() + " || cost: " + store.get(i).getPrice() + " gold.\n"); 
+			}
+		}
+		if(mode.equals("checkout"))
+		{
+			for(int i = 0; i < cart.size(); i++)
+			{
+				int j = i + 1;
+				System.out.println(j + ". " + cart.get(i).getName() + " || cost: " + cart.get(i).getPrice() + " gold.\n");
+			}
+		}
+		if(mode.equals("sell"))
+		{
+			for(int i = 0; i < inventory.size(); i++)
+			{
+				int j = i + 1;
+				System.out.println(j + ". " + inventory.get(i).getName() + " || cost: " + inventory.get(i).getPrice() + " gold.\n");
+			}
+		}
+	}
+	
+	public String toString()
+	{
+		String  "";
+		
+		for(int i = 0; i < store.size(); i++)
+		{
+			out += "\n" + store.get(i).toString();
+		}
+		
+		return out;
+	}
+	
+	public static void listener(Inventory inventory, Cart cart, ArrayList<Product> store, Scanner scan)
+	{
+		String in = scan.nextLine();
+		String last = "";
+		if(!last.equals(in))
+		{
+			last = in.toString();
+		}
+		
+		if("1".equals(in))
+		{
+			displayMenus("Product", store, cart);
+		}
+		if("2".equals(in))
+		{
+			displayMenus("Inventory", store, cart);
+		}
+		if("3".equals(in))
+		{
+			displayMenus("Cart", store, cart);
+		}
+		if("4".equals(in))
+		{
+			if(last.equals("2"))
+			{
+				displayMenus("Selling", store, cart);
+			}
+			if(last.equals("3"))
+			{
+				displayMenus("Purchase", store, cart);
+			}
+		}
+		if("q".equalsIgnoreCase(in))
+		{
+			displayMenus("Main", store, cart);
+		}
+		if(!in.equals("1") && !in.equals("2") && !in.equals("3") && !in.equals("4") && !in.equalsIgnoreCase("q"))
+		{
+			System.out.println("You look down as the ground beneath your feet begins to crumble away.\n"
+					+ "As you begin to fall, Xoblob casts Bigby's Hand,\nmaterializing an enormous purple-gloved hand hovering in midair,\n"
+					+ "quickly grabbing you before you fall and bringing you back to a safer area of the shop.\n");
+			displayMenus("Main", store, cart);
+		}
+		System.out.println();
+	}
+	
+	public static void main(String[] args)
+	{
+		Scanner scan = new Scanner(System.in);
+		Cart cart = new Cart();
+		
+		store = init();
+		
+		boolean isValidInput = false;
+		while(!isValidInput)
+		{
+			listener(inventory, cart, store, scan);
+		}
+	}
+}

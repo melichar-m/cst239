@@ -1,0 +1,25 @@
+package app;
+
+public class Store
+{
+	
+	public static void main(String[] args)
+	{
+		Product sword = new Product(00, "Needle", "Stick them with the pointy end", 150, 1, true);
+		System.out.println(sword);
+		
+		Product shield = new Product(01, "Bulwark of Azzinoth", "The coolest shield from the Burning Crusade", 100, 1, true);
+		System.out.println(shield);
+		
+		Cart cart = new Cart()();
+		
+		cart.addToCart(sword);
+		cart.addToCart(shield);
+		
+		System.out.println(cart);
+		
+		cart.removeFromCart(sword);
+		
+		System.out.println(cart);
+	}
+}
