@@ -15,8 +15,4 @@ public class Health extends Product
 		out += "Healing: " + this.healthPower + "\n";
 		return out;
 	}
-	public void setQuantity(int quantity)
-	{
-		super.setQuantity(quantity);
-	}
 }

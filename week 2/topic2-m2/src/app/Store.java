@@ -366,6 +366,11 @@ public class Store
 	{
 		Scanner scan = new Scanner(System.in);
 		String in = scan.nextLine();
+		if(in.equalsIgnoreCase("q"))
+		{
+			in = "999";
+			displayMenus(inventory, "Cart", store, cart);
+		}
 		int selectionIndex = Integer.parseInt(in)-1;
 		boolean firstLoop = true;
 		boolean isValid = false;
@@ -383,6 +388,7 @@ public class Store
 			if(in.equalsIgnoreCase("q"))
 			{
 				in = "999";
+				displayMenus(inventory, "Main", store, cart);
 			}
 			if(Integer.parseInt(in) <= cart.size() && Integer.parseInt(in) > 0)
 			{
@@ -393,7 +399,10 @@ public class Store
 					System.out.println("Nothing remaining in your cart.\nReturning you to the main menu.\n");
 					displayMenus(inventory, "Main", store, cart);
 				}
+				if(cart.size() > 0)
+				{
 				displayMenus(inventory, "Cancel", store, cart);
+				}
 			}
 			if(in.equalsIgnoreCase("999"))
 			{
